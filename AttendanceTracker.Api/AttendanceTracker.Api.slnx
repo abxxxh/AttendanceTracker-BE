@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="../AttendanceTracker.Application/AttendanceTracker.Application.csproj" />
+  <Project Path="../AttendanceTracker.Domain/AttendanceTracker.Domain.csproj" />
+  <Project Path="../AttendanceTracker.Infrastructure/AttendanceTracker.Infrastructure.csproj" />
+  <Project Path="AttendanceTracker.Api.csproj" />
+</Solution>
