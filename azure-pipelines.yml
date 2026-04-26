@@ -1,0 +1,34 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  buildConfiguration: 'Release'
+
+steps:
+
+# Install .NET SDK
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: '8.0.x'
+
+# Restore dependencies
+- script: dotnet restore
+  displayName: 'Restore NuGet packages'
+
+# Build project
+- script: dotnet build --configuration $(buildConfiguration) --no-restore
+  displayName: 'Build project'
+
+# Publish project
+- script: dotnet publish AttendanceTracker.Api/AttendanceTracker.Api.csproj --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)
+  displayName: 'Publish project'
+
+# Upload build artifact
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: '$(Build.ArtifactStagingDirectory)'
+    artifactName: 'drop'
